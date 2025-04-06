@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Maal</title>
+    <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        .content {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .footer {
+            background: #00F0FF;
+            padding: 1rem;
+            text-align: center;
+            position: relative;
+            margin-top: 3rem;
+            color: black;
+            font-size: 0.8rem;
+            line-height: 1.5;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-email {
+            text-align: center;
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+
+        .footer-email a {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .footer-email a:hover {
+            text-decoration: none;
+        }
+
+        .copy-tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+        }
+
+        .copy-tooltip.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="shapes">
+        <div class="shape shape1"></div>
+        <div class="shape shape2"></div>
+        <div class="shape shape3"></div>
+    </div>
+    <div class="container">
+        <div class="content">
+            <div class="logo">
+                <img src="logo.png" alt="Company Logo" class="logo-image">
+            </div>
+            <a href="intro-light.html" class="theme-switcher">Light</a>
+            <h1>Welcome to Our Platform</h1>
+            <p class="subtitle">Discover the future of innovation and be part of our journey.</p>
+            
+            <div class="traits-container">
+                <div class="trait-box">
+                    <h3>Innovation</h3>
+                    <p>We leverage innovative technology and creative solutions to deliver results. By utilizing our partner-to-be infrastructure, we guarantee both reliability and confidence for our users. If you're curious about our specific methods, please contact our support team via the email address provided at the bottom of the page.</p>
+                </div>
+                <div class="trait-box">
+                    <h3>Fees</h3>
+                    <p>We offer 40-70% lower fees compared to our nearest competitor, meaning individual users can save hundreds of dollars while businesses could save thousands annually! You might think this means longer payment processing times, but that's not the case. Our settlement time is within 1 day, but recipients typically receive their payments within just 6 hours—matching or even exceeding the speed of other competitors. What about exchange rates? Maal uses live exchange methods and doesn't profit from these exchanges like most competitors do, keeping fees as low as possible.</p>
+                </div>
+                <div class="trait-box">
+                    <h3>Initial Release</h3>
+                    <p>We will support EUR and USD currencies from our initial release with plans to expand gradually. Within 2 months of launch, we will begin supporting BRL and MXN, followed by the addition of as many currencies as possible. Our goal is to rapidly expand account and currency support to numerous countries worldwide.</p>
+                </div>
+                <div class="trait-box">
+                    <h3>Customer Support</h3>
+                    <p>For beta users (those who join from the waitlist), we guarantee 24/7/365 support. If you don't receive a response from an actual agent within 4 hours of sending an email, you'll immediately receive 1 week of fee-free transactions as compensation that begins on the same day such delay occurs.(Spams are excluded)</p>
+                </div>
+            </div>
+
+            <div class="intro-content">
+                <p>We're building something amazing, and we want you to be part of it.</p>
+                <p>Join our exclusive waitlist today and be among the first to experience our groundbreaking features.</p>
+            </div>
+
+            <div class="cta-buttons">
+                <a href="index.html" class="cta-button">Join the Waitlist</a>
+                <a href="compare-fees.html" class="cta-button compare-fees">Compare Fees</a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-copyright">
+                © 2025 Maal. All rights reserved. Exchange rates are for informational purposes only.
+            </div>
+            <div class="footer-disclaimer">
+                Rates and fees are subject to change. Not all services are available in all locations.
+            </div>
+            <div class="footer-email">
+                <a href="javascript:void(0)" onclick="copyEmail(event)" data-email="support@maalpayments.com">support@maalpayments.com<span class="copy-tooltip">Click to copy</span></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function copyEmail(event) {
+            event.preventDefault();
+            const element = event.currentTarget;
+            const email = element.getAttribute('data-email');
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(email).then(() => {
+                // Show tooltip with "Copied!" message
+                const tooltip = element.querySelector('.copy-tooltip');
+                tooltip.textContent = 'Copied!';
+                tooltip.classList.add('show');
+                
+                // Hide tooltip after 2 seconds
+                setTimeout(() => {
+                    tooltip.classList.remove('show');
+                    tooltip.textContent = 'Click to copy';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+            });
+        }
+
+        // Add hover effect for tooltip
+        document.addEventListener('DOMContentLoaded', function() {
+            const emailLinks = document.querySelectorAll('.footer-email a');
+            emailLinks.forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    const tooltip = this.querySelector('.copy-tooltip');
+                    if (tooltip) tooltip.classList.add('show');
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    const tooltip = this.querySelector('.copy-tooltip');
+                    if (tooltip) {
+                        tooltip.classList.remove('show');
+                        tooltip.textContent = 'Click to copy';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

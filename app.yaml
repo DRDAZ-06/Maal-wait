@@ -1,0 +1,13 @@
+name: maal-website
+static_sites:
+- name: maal-website
+  github:
+    repo: your-github-username/your-repo-name
+    branch: main
+    deploy_on_push: true
+  source_dir: /
+  output_dir: /
+  index_document: index.html
+  error_document: index.html
+  catchall_document: index.html
+  environment_slug: html 

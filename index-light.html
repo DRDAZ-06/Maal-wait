@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join the Waitlist</title>
+    <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="stylesheet" href="styles-light.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        .content {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .footer {
+            background: #00F0FF;
+            padding: 1rem;
+            text-align: center;
+            position: relative;
+            margin-top: 3rem;
+            color: black;
+            font-size: 0.8rem;
+            line-height: 1.5;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-email {
+            text-align: center;
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+
+        .footer-email a {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .footer-email a:hover {
+            text-decoration: none;
+        }
+
+        .copy-tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+        }
+
+        .copy-tooltip.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="shapes">
+        <div class="shape shape1"></div>
+        <div class="shape shape2"></div>
+        <div class="shape shape3"></div>
+    </div>
+    <div class="container">
+        <div class="content">
+            <div class="logo">
+                <img src="logoblack.png" alt="Company Logo" class="logo-image">
+            </div>
+            <a href="intro-light.html" class="back-button">Back</a>
+            <a href="index.html" class="theme-switcher">Dark</a>
+            <h1>Be the first to know</h1>
+            <p class="subtitle">Join our exclusive waitlist and be part of something extraordinary.</p>
+            
+            <form class="waitlist-form" id="waitlistForm">
+                <div class="input-group">
+                    <div class="user-type-buttons">
+                        <button type="button" class="user-type-btn" data-type="business">Business</button>
+                        <button type="button" class="user-type-btn" data-type="individual">Individual</button>
+                    </div>
+                    <input type="hidden" id="userType" name="userType" required>
+                    <input type="email" id="email" placeholder="Enter your email address" required>
+                </div>
+                <button type="submit">Join Waitlist</button>
+                <p class="form-note">We respect your privacy. No spam, ever.</p>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-copyright">
+                © 2025 Maal. All rights reserved. Exchange rates are for informational purposes only.
+            </div>
+            <div class="footer-disclaimer">
+                Rates and fees are subject to change. Not all services are available in all locations.
+            </div>
+            <div class="footer-email">
+                <a href="javascript:void(0)" onclick="copyEmail(event)" data-email="support@maalpayments.com">support@maalpayments.com<span class="copy-tooltip">Click to copy</span></a>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+    <script>
+        function copyEmail(event) {
+            event.preventDefault();
+            const element = event.currentTarget;
+            const email = element.getAttribute('data-email');
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(email).then(() => {
+                // Show tooltip with "Copied!" message
+                const tooltip = element.querySelector('.copy-tooltip');
+                tooltip.textContent = 'Copied!';
+                tooltip.classList.add('show');
+                
+                // Hide tooltip after 2 seconds
+                setTimeout(() => {
+                    tooltip.classList.remove('show');
+                    tooltip.textContent = 'Click to copy';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Clear localStorage immediately when page loads
+            localStorage.removeItem('waitlistEmail');
+            localStorage.removeItem('userType');
+            
+            const emailLinks = document.querySelectorAll('.footer-email a');
+            emailLinks.forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    const tooltip = this.querySelector('.copy-tooltip');
+                    if (tooltip) tooltip.classList.add('show');
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    const tooltip = this.querySelector('.copy-tooltip');
+                    if (tooltip) {
+                        tooltip.classList.remove('show');
+                        tooltip.textContent = 'Click to copy';
+                    }
+                });
+            });
+
+            // Don't retrieve saved email from localStorage
+            // const savedEmail = localStorage.getItem('waitlistEmail');
+            // if (savedEmail) {
+            //     document.getElementById('email').value = savedEmail;
+            // }
+
+            // Don't save email to localStorage when user types
+            const emailInput = document.getElementById('email');
+            // emailInput.addEventListener('input', function() {
+            //     localStorage.setItem('waitlistEmail', this.value);
+            // });
+
+            // Don't save user type selection
+            const userTypeButtons = document.querySelectorAll('.user-type-btn');
+            const userTypeInput = document.getElementById('userType');
+            // const savedUserType = localStorage.getItem('userType');
+            
+            // if (savedUserType) {
+            //     userTypeButtons.forEach(btn => {
+            //         if (btn.getAttribute('data-type') === savedUserType) {
+            //             btn.classList.add('selected');
+            //             userTypeInput.value = savedUserType;
+            //         } else {
+            //             btn.classList.remove('selected');
+            //         }
+            //     });
+            // } else {
+            //     // If no saved user type, make sure the hidden input is empty
+            //     userTypeInput.value = '';
+            // }
+
+            userTypeButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    userTypeButtons.forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                    const selectedType = this.getAttribute('data-type');
+                    userTypeInput.value = selectedType;
+                    // Don't save to localStorage
+                    // localStorage.setItem('userType', selectedType);
+                });
+            });
+            
+            // Clear localStorage when form is submitted
+            const waitlistForm = document.getElementById('waitlistForm');
+            waitlistForm.addEventListener('submit', function(e) {
+                // Don't prevent default to allow form submission
+                // Clear localStorage immediately
+                localStorage.removeItem('waitlistEmail');
+                localStorage.removeItem('userType');
+            });
+        });
+    </script>
+</body>
+</html> 
