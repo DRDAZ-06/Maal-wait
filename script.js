@@ -40,6 +40,7 @@ document.getElementById('waitlistForm').addEventListener('submit', function(e) {
     const labeledEmail = `${userType.toUpperCase()}: ${email}`;
     
     // Send data to webhook
+    console.log("Email value:", email);
     fetch('https://hooks.zapier.com/hooks/catch/22345319/2c036mk/', {
         method: 'POST',
         headers: {
